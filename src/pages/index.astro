@@ -1,11 +1,39 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import {MovieGrid} from '@/components/MovieGrid';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Reseñas de peliculas resumidas | Morevie"
+	description="">
+	<div class="w-full relative max-h-[500px] flex justify-center  ">
+		<img class="w-full h-full mask-b-from-60% mask-b-to-90% rounded-3xl" loading="lazy" src="/MovieTitle.webp" />
+		<div class="absolute top-32">
+			<h1 class=" text-white font-bold text-5xl md:text-6xl text-center mb-4 tracking-tight">
+			Reseñ<span class="text-blue-400">AI</span>
+			</h1>
+			<p class="text-neutral-300 text-xl md:text-2xl text-center max-w-2xl mx-auto leading-relaxed ">
+			Reseñas de películas resumidas con inteligencia artificial
+			</p>
+
+			<div class="flex gap-4 justify-center pt-8">
+				<div>
+					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Jeiler.webp" />
+					<p class="text-center text-white font-bold pt-3">Jeiler Gutierrez</p>
+				</div>
+				<div>
+					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Carlos.webp" />
+					<p class="text-center text-white font-bold pt-3">Carlos Romero</p>
+				</div>
+				<div>
+					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Felipe.webp" />
+					<p class="text-center text-white font-bold pt-3">Felipe Alvear</p>
+
+				</div>
+			</div>			
+		</div>
+	</div>
+	<br />
+	<br />
+	<MovieGrid client:load />
 </Layout>

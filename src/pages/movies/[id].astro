@@ -13,12 +13,12 @@ if (id === '') Astro.redirect('/')
 const { title, overview, vote_average, poster } = await getMovieById({ id, lang: "es-ES" })
 
 const reviews = await getMovieReview({ id })
-// const gptres = getGPTMovieReview({
-//   title,
-//   score: vote_average,
-//   reviews,
-// })
-const gptres = ""
+const gptres = getGPTMovieReview({
+  title,
+  score: vote_average,
+  reviews,
+})
+// const gptres = ""
 
 ---
 

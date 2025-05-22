@@ -76,7 +76,10 @@ import {MovieGrid} from '@/components/MovieGrid';
 		</div>
 	</div>
 
-	<MovieGrid client:load />
+	<!-- MovieGrid section is now a separate div with higher z-index -->
+	<div class="relative z-20 bg-black">
+		<MovieGrid client:load />
+	</div>
 
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
@@ -84,14 +87,33 @@ import {MovieGrid} from '@/components/MovieGrid';
 			const teamHeading = document.getElementById('teamHeading');
 			let hasColorChanged = false;
 			
+			// Check if user is coming back from another page
+			const checkIfReturnedFromDetail = () => {
+				const urlParams = new URLSearchParams(window.location.search);
+				return urlParams.has('fromDetail') || document.referrer.includes('/movies/');
+			};
+			
 			if (hero) {
 				const heroHeight = hero.offsetHeight;
+				
+				// If returning from detail page, hide hero immediately
+				if (checkIfReturnedFromDetail()) {
+					hero.style.opacity = "0";
+					hero.style.visibility = "hidden";
+				}
 				
 				window.addEventListener('scroll', () => {
 					const scrollPosition = window.scrollY;
 					// Calcula la opacidad basada en el scroll (0 a 1)
 					const opacity = 1 - Math.min(scrollPosition / (heroHeight * 0.7), 1);
 					hero.style.opacity = opacity.toString();
+					
+					// Esconder el hero completamente cuando la opacidad es muy baja
+					if (opacity < 0.05) {
+						hero.style.visibility = 'hidden';
+					} else {
+						hero.style.visibility = 'visible';
+					}
 					
 					// Efecto parallax suave
 					hero.style.transform = `translateY(${scrollPosition * 0.3}px)`;

@@ -5,56 +5,98 @@ import {MovieGrid} from '@/components/MovieGrid';
 
 <Layout
 	title="Reseñas de peliculas resumidas | Morevie"
-	description="">
-	<div class="w-full relative max-h-[500px] flex justify-center ">
-		<img class="w-full h-full mask-b-from-60% mask-b-to-90% rounded-3xl" loading="lazy" src="/MovieTitle.webp" />
-		<div class="absolute top-22">
-			<h1 class=" text-white font-bold text-5xl md:text-6xl text-center mb-4 tracking-tight">
-			Reseñ<span class="text-blue-400">AI</span>
-			</h1>
-			<p class="text-neutral-300 text-xl md:text-2xl text-center max-w-2xl mx-auto leading-relaxed ">
-			Reseñas de películas resumidas con inteligencia artificial
-			</p>
-					<div class="grid grid-cols-2 gap-4 max-w-6xl mx-auto mt-10 ">
-						<div class="bg-gray-900 p-4 rounded-lg shadow-md">
-							<p class="text-white font-bold">¿De qué trata esta web?</p>
-							<p class="text-white">En esta página encontrarás una colección de películas con reseñas generadas a partir de lo que opinan realmente los espectadores. En lugar de críticas tradicionales, usamos inteligencia artificial para resumir cientos de comentarios y darte una idea clara de lo que piensa la mayoría.</p>
+	description="Reseñas de películas generadas por IA basadas en opiniones reales de usuarios">
+	<div class="relative min-h-screen">
+		<!-- Hero Section with Scroll Effect -->
+		<div id="hero" class="fixed top-0 left-0 w-full h-screen max-h-[800px] flex items-center justify-center bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20 z-0 transition-opacity duration-1000" style="opacity: 1;">
+			<div class="absolute inset-0 bg-black/5"></div>
+			<div class="relative z-10 text-center px-4">
+				<h1 class="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter">
+					Reseñ<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 hover:from-blue-200 hover:to-purple-300 transition-all duration-300">AI</span>
+				</h1>
+				<p class="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto mb-12">
+					Descubre lo que realmente piensan los espectadores, resumido en segundos
+				</p>
+			</div>
+		</div>
+
+		<!-- Content Overlay with Scroll Transition -->
+		<div class="relative z-10 pt-[100vh] bg-gradient-to-b from-transparent via-black/80 to-black">
+			<!-- Features Section with Enhanced Blur Effects -->
+			<div class="container mx-auto px-4 py-32 -mt-20 relative z-20 mb-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 backdrop-blur-md">
+					<div class="bg-white/15 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300">
+						<h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">¿De qué trata esta web?</h3>
+						<p class="text-gray-200 group-hover:text-white transition-colors duration-300">Analizamos miles de opiniones reales y usamos IA para crear resúmenes honestos sobre películas, sin sesgos ni spoilers.</p>
+					</div>
+					<div class="bg-white/15 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300">
+						<h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">Inteligencia colectiva</h3>
+						<p class="text-gray-200 group-hover:text-white transition-colors duration-300">No es la opinión de un crítico, es el sentir general de cientos de espectadores como tú.</p>
+					</div>
+					<div class="bg-white/15 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300">
+						<h3 class="text-2xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300">Decide qué ver</h3>
+						<p class="text-gray-200 group-hover:text-white transition-colors duration-300">Encuentra películas que realmente valgan tu tiempo, basado en lo que importa: la experiencia real de otros.</p>
+					</div>
+					<div class="bg-white/15 backdrop-blur-lg rounded-xl p-6 border border-white/20 hover:border-pink-400 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300">
+						<h3 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors duration-300">Sin rodeos</h3>
+						<p class="text-gray-200 group-hover:text-white transition-colors duration-300">Opiniones directas y claras, sin tecnicismos ni críticas pretenciosas.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Authors Section with Glass Effect -->
+			<div class="py-32 bg-black">
+				<div class="container mx-auto px-4 backdrop-blur-md">
+					<h2 class="text-4xl font-bold text-center text-white mb-16 backdrop-blur-sm py-2">Nuestro Equipo</h2>
+					<div class="flex flex-wrap justify-center gap-8 backdrop-blur-sm">
+						<div class="w-72 text-center group bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+							<div class="relative overflow-hidden rounded-full w-48 h-48 mx-auto mb-4 ring-2 ring-white/30 hover:ring-blue-500/70 transition-all duration-300">
+								<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="/Jeiler.webp" alt="Jeiler Gutierrez" />
+								<div class="absolute inset-0 bg-gradient-to-t from-blue-500/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+							</div>
+							<h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">Jeiler Gutierrez</h3>
+							<p class="text-gray-300 group-hover:text-blue-200 transition-colors duration-300">Estudiante</p>
 						</div>
-						<div class="bg-gray-900 p-4 rounded-lg shadow-md">
-							<p class="text-white font-bold">Reseñas hechas con inteligencia colectiva</p>
-							<p class="text-white">Las reseñas que ves aquí no vienen de una sola persona, sino de muchas. Analizamos opiniones reales de usuarios en internet y las convertimos en resúmenes fáciles de leer. Así sabrás si una película es emocionante, aburrida, divertida o impactante según quienes ya la vieron.</p>
+						<div class="w-72 text-center group bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+							<div class="relative overflow-hidden rounded-full w-48 h-48 mx-auto mb-4 ring-2 ring-white/30 hover:ring-purple-500/70 transition-all duration-300">
+								<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="/Carlos.webp" alt="Carlos Romero" />
+								<div class="absolute inset-0 bg-gradient-to-t from-purple-500/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+							</div>
+							<h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors duration-300">Carlos Romero</h3>
+							<p class="text-gray-300 group-hover:text-purple-200 transition-colors duration-300">Estudiante</p>
 						</div>
-						<div class="bg-gray-900 p-4 rounded-lg shadow-md">
-							<p class="text-white font-bold">Una forma diferente de elegir qué ver</p>
-							<p class="text-white">¿Cansado de reseñas que no te dicen nada? Aquí te ayudamos a decidir qué película ver basándonos en lo que dice la gente, no solo en números o estrellas. Descubre lo que otros sienten y piensan, resumido en unos pocos párrafos.</p>
-						</div>
-						<div class="bg-gray-900 p-4 rounded-lg shadow-md">
-							<p class="text-white font-bold">Opiniones reales, sin rodeos</p>
-							<p class="text-white">Nuestra web está pensada para quienes quieren una visión honesta y directa sobre una película. Usamos tecnología para leer miles de opiniones y convertirlas en un resumen claro, sin spoilers y sin tecnicismos.</p>
+						<div class="w-72 text-center group bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+							<div class="relative overflow-hidden rounded-full w-48 h-48 mx-auto mb-4 ring-2 ring-white/30 hover:ring-indigo-500/70 transition-all duration-300">
+								<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="/Felipe.webp" alt="Felipe Alvear" />
+								<div class="absolute inset-0 bg-gradient-to-t from-indigo-500/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+							</div>
+							<h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">Felipe Alvear</h3>
+							<p class="text-gray-300 group-hover:text-indigo-200 transition-colors duration-300">Estudiante</p>
 						</div>
 					</div>
-
-<!-- Autores -->
-
-			<div class="flex gap-4 justify-center pt-5 ">
-
-				<div>
-					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Jeiler.webp" />
-					<p class="text-center text-white font-bold pt-3">Jeiler Gutierrez</p>
 				</div>
-				<div>
-					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Carlos.webp" />
-					<p class="text-center text-white font-bold pt-3">Carlos Romero</p>
-				</div>
-				<div>
-					<img class="rounded-full w-30 h-50 mx-auto mt-4 transition delay-150 duration-150 ease-in-out hover:-translate-y-4 hover:scale-110" src="/Felipe.webp" />
-					<p class="text-center text-white font-bold pt-3">Felipe Alvear</p>
-				</div>
-
-			</div>	
+			</div>
 		</div>
 	</div>
- <div class="my-95"></div>
 
 	<MovieGrid client:load />
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const hero = document.getElementById('hero');
+			if (hero) {
+				const heroHeight = hero.offsetHeight;
+				
+				window.addEventListener('scroll', () => {
+					const scrollPosition = window.scrollY;
+					// Calcula la opacidad basada en el scroll (0 a 1)
+					const opacity = 1 - Math.min(scrollPosition / (heroHeight * 0.7), 1);
+					hero.style.opacity = opacity.toString();
+					
+					// Efecto parallax suave
+					hero.style.transform = `translateY(${scrollPosition * 0.3}px)`;
+				});
+			}
+		});
+	</script>
 </Layout>

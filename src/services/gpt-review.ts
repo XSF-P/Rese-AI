@@ -6,7 +6,16 @@ interface GPTMovieReviewParams {
   title: string;
   score: number;
   reviews: MovieReviewResponse[];
+  customModels?: string[]; // Modelos personalizados opcionales
 }
+
+// Lista de modelos predeterminados ordenados por preferencia
+const DEFAULT_MODELS = [
+  "meta-llama/llama-4-scout:free",
+  "meta-llama/llama-4-maverick:free",
+  "tngtech/deepseek-r1t-chimera:free",
+  "microsoft/phi-4-reasoning:free",
+];
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
@@ -18,6 +27,7 @@ export async function getGPTMovieReview({
   title,
   score,
   reviews,
+  customModels,
 }: GPTMovieReviewParams) {
   const prompt = `Escribe un resumen de las valoraciones de la pelicula ${title} en español. La puntuación es ${score} de 10.
 
@@ -25,7 +35,7 @@ export async function getGPTMovieReview({
   - De 0 a 3: Negativo
   - De 4 a 6: Neutral
   - De 7 a 10: Positivo
-  Recibiras una lista de valoraciones de usuarios en diferentes idiomas pero deberas dar el resumen en español.
+  Recibiras una lista de valoraciones de usuarios pero deberas dar el resumen en español.
   Tu objetivo es resaltar los temas más comunes y las emociones expresadas por los usuarios.
   Si hay varios temas, intenta capturar los más importantes.
   Intenta usar como máximo 40 palabras y 5 parrafos.
@@ -39,18 +49,35 @@ export async function getGPTMovieReview({
   La estructura de respuesta debe ser solo texto limpio.
   `;
 
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Eres un analista de comentarios en peliculas por usuarios que debes concretarlos en un único resumen con lo más relevante y critico.",
-      },
-      { role: "user", content: prompt },
-    ],
-    model: "qwen/qwen3-4b:free",
-  });
-  console.log(completion);
+  const messages = [
+    {
+      role: "system" as const,
+      content:
+        "Eres un analista de comentarios en peliculas por usuarios que debes concretarlos en un único resumen con lo más relevante y critico.",
+    },
+    { role: "user" as const, content: prompt },
+  ];
 
-  return completion.choices[0].message.content;
+  // Usar modelos personalizados si se proporcionan, o los predeterminados si no
+  const modelsToUse = customModels?.length ? customModels : DEFAULT_MODELS;
+
+  // Intentar cada modelo en secuencia
+  let lastError = null;
+  for (const model of modelsToUse) {
+    try {
+      console.log(`Intentando con el modelo: ${model}`);
+      const completion = await openai.chat.completions.create({
+        messages,
+        model,
+      });
+      return completion.choices[0].message.content;
+    } catch (error) {
+      console.error(`Error con el modelo ${model}:`, error);
+      lastError = error;
+      // Continuar con el siguiente modelo
+    }
+  }
+
+  // Si todos los modelos fallan, lanza el último error
+  throw new Error(`Todos los modelos fallaron. Último error: ${lastError}`);
 }

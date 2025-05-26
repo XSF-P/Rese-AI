@@ -11,10 +11,12 @@ interface GPTMovieReviewParams {
 
 // Lista de modelos predeterminados ordenados por preferencia
 const DEFAULT_MODELS = [
-  "meta-llama/llama-4-scout:free",
+  "microsoft/phi-4-reasoning-plus:free",
   "meta-llama/llama-4-maverick:free",
+  "qwen/qwen2.5-vl-32b-instruct:free",
+  "nvidia/llama-3.3-nemotron-super-49b-v1:free",
   "tngtech/deepseek-r1t-chimera:free",
-  "microsoft/phi-4-reasoning:free",
+  "meta-llama/llama-4-scout:free",
 ];
 
 const openai = new OpenAI({

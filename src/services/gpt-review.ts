@@ -19,6 +19,9 @@ const DEFAULT_MODELS = [
   "meta-llama/llama-4-scout:free",
 ];
 
+// Tiempo máximo para cada petición (en milisegundos)
+const MODEL_TIMEOUT = 20000; // 20 segundos
+
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: AI_API_KEY,
@@ -63,19 +66,30 @@ export async function getGPTMovieReview({
   // Usar modelos personalizados si se proporcionan, o los predeterminados si no
   const modelsToUse = customModels?.length ? customModels : DEFAULT_MODELS;
 
-  // Intentar cada modelo en secuencia
   let lastError = null;
+  
+  // Intentar cada modelo en secuencia
   for (const model of modelsToUse) {
     try {
       console.log(`Intentando con el modelo: ${model}`);
-      const completion = await openai.chat.completions.create({
-        messages,
-        model,
-      });
-      return completion.choices[0].message.content;
+      
+      // Crear una promesa con timeout para cada modelo
+      const modelResponse = await Promise.race([
+        openai.chat.completions.create({
+          messages,
+          model,
+        }),
+        new Promise<never>((_, reject) => 
+          setTimeout(() => reject(new Error(`Timeout alcanzado para ${model}`)), MODEL_TIMEOUT)
+        )
+      ]);
+      
+      console.log(`Modelo ${model} respondió correctamente`);
+      return modelResponse.choices[0].message.content;
     } catch (error) {
       console.error(`Error con el modelo ${model}:`, error);
       lastError = error;
+      console.log(`Pasando al siguiente modelo...`);
       // Continuar con el siguiente modelo
     }
   }
